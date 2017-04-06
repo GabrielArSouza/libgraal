@@ -3,6 +3,8 @@
 
 namespace graal {
 
+	#include <cstdlib>
+
 	using Action = void ( * ) ( void * );
 
 	void transform ( void *first, void *last, std::size_t size, Action p );
