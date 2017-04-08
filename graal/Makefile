@@ -9,7 +9,7 @@ SRCDIR = src
 OBJDIR = build
 
 # TARGET #
-TARGET = $(BINDIR)/a
+TARGET = $(BINDIR)/libgraal.a
 
 
 ## EXTENSIONS 
@@ -28,13 +28,11 @@ CC = g++
 WARN = -Wall
 INCFLAG = -I $(INCDIR)/
 CFLAGS = $(WARN) -std=c++11 -c $(INCFLAG)
-#ar rvs build/libgraal.a build/graal.o
 
 ## Lib generate
 LIB = ar
 COMP = rvs
 
-#g++ -Wall -std=c++11 -c -I include/ src/graal.cpp -o build/graal.o
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@echo "Gerando código objeto..."	
 	@mkdir -p $(OBJDIR)
@@ -44,11 +42,18 @@ $(TARGET): $(OBJS)
 	@echo "Gerando biblioteca..."
 	$(LIB) $(COMP) $@ $^
 
+.PHONY: clean mrproper
+
+##Gerar aplicação para cliente
+##Depois disso cliente só precisa usar seu make
+	@echo "Gerando código cliente"
+	@cp build/libgraal.a ../App/lib/
+	@cp includes/graal.h ../App/includes/
+
 
 clean:
 	@echo "Limpando..."
-#	@rm -rf $(OBJDIR)/*
-#	@rm -rf $(TARGET)
+	mrproper: clean
+	@rm -rf $(OBJDIR)/*.o
 
 
-.PHONY: clean
