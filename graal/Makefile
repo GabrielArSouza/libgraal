@@ -9,7 +9,7 @@ SRCDIR = src
 OBJDIR = build
 
 # TARGET #
-TARGET = $(BINDIR)/exe
+TARGET = $(BINDIR)/a
 
 
 ## EXTENSIONS 
@@ -28,6 +28,11 @@ CC = g++
 WARN = -Wall
 INCFLAG = -I $(INCDIR)/
 CFLAGS = $(WARN) -std=c++11 -c $(INCFLAG)
+#ar rvs build/libgraal.a build/graal.o
+
+## Lib generate
+LIB = ar
+COMP = rvs
 
 #g++ -Wall -std=c++11 -c -I include/ src/graal.cpp -o build/graal.o
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
@@ -36,8 +41,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) $^ -o $@ 
 
 $(TARGET): $(OBJS)
-	@echo "Compilando..."
-	$(CC) -o $@ $^
+	@echo "Gerando biblioteca..."
+	$(LIB) $(COMP) $@ $^
 
 
 clean:
