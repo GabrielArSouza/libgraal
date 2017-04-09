@@ -33,27 +33,33 @@ CFLAGS = $(WARN) -std=c++11 -c $(INCFLAG)
 LIB = ar
 COMP = rvs
 
+
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@echo "Gerando código objeto..."	
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) $^ -o $@ 
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) 
 	@echo "Gerando biblioteca..."
 	$(LIB) $(COMP) $@ $^
 
-.PHONY: clean mrproper
-
 ##Gerar aplicação para cliente
 ##Depois disso cliente só precisa usar seu make
-	@echo "Gerando código cliente"
+.PHONY: client
+client:
+	@echo "Gerando código cliente..."
 	@cp build/libgraal.a ../App/lib/
 	@cp includes/graal.h ../App/includes/
 
-
-clean:
+.PHONY: clean
+clean: 
 	@echo "Limpando..."
-	mrproper: clean
 	@rm -rf $(OBJDIR)/*.o
+
+
+
+
+
+
 
 
