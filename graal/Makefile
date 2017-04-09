@@ -33,28 +33,30 @@ CFLAGS = $(WARN) -std=c++11 -c $(INCFLAG)
 LIB = ar
 COMP = rvs
 
+all: $(TARGET) install clean
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@echo "Gerando código objeto..."	
+	@echo "(1) Gerando código objeto..."	
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) $^ -o $@ 
 
 $(TARGET): $(OBJS) 
-	@echo "Gerando biblioteca..."
+	@echo "(2) Gerando biblioteca..."
 	$(LIB) $(COMP) $@ $^
 
 ##Gerar aplicação para cliente
 ##Depois disso cliente só precisa usar seu make
-.PHONY: client
-client:
-	@echo "Gerando código cliente..."
+.PHONY: install
+install:
+	@echo "(3) Instalando Graal..."
 	@cp build/libgraal.a ../App/lib/
 	@cp includes/graal.h ../App/includes/
 
 .PHONY: clean
 clean: 
-	@echo "Limpando..."
+	@echo "(4) Limpando..."
 	@rm -rf $(OBJDIR)/*.o
+	@rm -rf $(OBJDIR)/*.a
 
 
 
