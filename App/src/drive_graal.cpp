@@ -24,12 +24,23 @@ bool cmp_min ( const void *a, const void *b)
 
 }
 
-bool cmp_equal ( const void * a, const void * b)
+bool cmp_equal ( const void * a, const void * b )
 {
 	auto *aa = ( int * ) a;
 	auto *bb = ( int * ) b;
 
 	return *aa == *bb;
+}
+
+int compare ( const void * a, const void * b )
+{
+	auto aa = ( int * ) a;
+	auto bb = ( int * ) b;
+
+	if ( *aa < *bb ) return -1;
+	else if ( *aa == *bb ) return 0;
+	else return 1;
+
 }
 
 int main ()
@@ -89,6 +100,20 @@ int main ()
     	auto lim = (int *) graal::Unique ( std::begin(F), std::end(F), sizeof(int), cmp_equal );
     	graal::transform( std::begin(F), lim, sizeof(int), print_int);
     	std::cout << " ]\n";
+    }
+
+    //testanto BSearch
+    {
+
+    	int T[] = { -3, -1, 0, 2, 3, 4, 5, 7, 8, 9, 10 };
+    	std::cout << ">>>Array T [ ";
+    	graal::transform( std::begin(T), std::end(T), sizeof(int), print_int);
+    	std::cout << " ]\n";
+    	std::cout << ">>>Procurando elemento em T...\n";
+    	auto target = 25;
+    	auto p = ( int *) graal::BSearch( std::begin(T), std::end(T), sizeof(int), compare, &target);
+    	if ( p == std::end(T) ) std::cout << " Não Achei :( \n";
+    	else std::cout << ">>> Você procurou o número " << *p << std::endl;
     }
 
 
