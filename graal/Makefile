@@ -4,13 +4,11 @@
 
 ## DIRS
 INCDIR = includes
-BINDIR = build
 SRCDIR = src
 OBJDIR = build
 
 # TARGET #
 TARGET = $(BINDIR)/libgraal.a
-
 
 ## EXTENSIONS 
 SRCEXT = cpp
