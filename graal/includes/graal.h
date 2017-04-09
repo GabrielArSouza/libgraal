@@ -10,6 +10,7 @@ namespace graal {
 	using Action = void ( * ) ( void * );
 	using UnaryPredicate = bool (*) (const void * );
 	using Compare = bool (*) (const void *, const void * );
+	using CompareTotal = int (*) (const void *, const void * );
 
 	void transform ( void *first, void *last, std::size_t size, Action p );
 	void * Find_If ( const void *first, const void *last, std::size_t size, UnaryPredicate p );
@@ -17,7 +18,7 @@ namespace graal {
 	void * Copy ( const void *first, const void *last, std::size_t size, void *d_first );
 	void * Remove_IF ( const void *first, const void * last, std::size_t size, UnaryPredicate p );
 	void * Unique ( const void *first, const void * last, std::size_t size, Compare cmp );
-
+	void * BSearch ( const void *left, const void * right, std::size_t size, CompareTotal cmp, const void * target);
 }
 
 

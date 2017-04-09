@@ -129,4 +129,33 @@ namespace graal {
 
 	}
 
+	void
+	* BSearch ( const void *left, const void * right,
+				std::size_t size, CompareTotal cmp,
+				const void * target )
+	{
+
+		auto l = ( byte * ) left;
+		auto r = ( byte * ) right;
+
+		byte * m;
+
+		while ( l <= r  )
+		{
+			auto d = std::distance(l, r);
+			auto t = d/size;
+			m = l + (t/2)*size;
+
+			auto v = cmp(m, target);
+
+			if ( v == 0 ) return ( void * ) m;
+			else if ( v == -1 ) l = m + size;
+			else if ( v == 1 ) r = m - size;
+			
+		}
+
+		return ( void * ) r;
+
+	}
+
 }
