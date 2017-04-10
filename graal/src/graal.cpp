@@ -158,4 +158,81 @@ namespace graal {
 
 	}
 
+	void
+	* QSort ( const void *first, const void *last, 
+			  std::size_t size, CompareTotal cmp)
+
+	{
+
+		auto f = ( byte * ) first;
+		auto l = ( byte * ) last;
+
+		auto pivot = (l - size);
+		auto slow ( f );
+		auto fast ( f );
+
+		if ( f == l ) return ( void * ) 0;
+
+		byte aux[size];
+
+		while ( fast != l )
+		{
+			auto v = cmp(fast, pivot);
+			if ( v != 1 )
+			{
+				memcpy ( aux, slow, size );
+				memcpy ( slow, fast, size );
+				memcpy ( fast, aux, size );
+
+				slow += size;
+			}
+
+			fast += size;
+
+		}
+
+		auto pastPivot = slow;
+
+		QSort (first, pastPivot-size, size, cmp);
+		QSort (pastPivot, last, size, cmp);
+
+		return ( void * ) 0;
+	}
+
+	void
+	* BSort ( const void *first, const void *last,
+			  std::size_t size, CompareTotal cmp)
+	{
+
+		auto f = ( byte * ) first;
+		auto l = ( byte * ) last;
+
+		bool swap = true;	
+		byte aux [size];
+
+		while ( swap )
+		{
+			swap = false;
+
+			for ( auto i(f); i < l; i += size)
+			{
+			
+				auto prox = i + size;
+				auto v = cmp( i, prox );
+				
+				if ( v == 1)
+				{
+					memcpy ( aux, i, size );
+					memcpy ( i, prox, size );
+					memcpy ( prox, aux, size );
+
+					swap = true;
+				}
+			}
+		}
+
+		return ( void * ) 0;
+	}
+
+
 }
