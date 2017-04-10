@@ -3,13 +3,12 @@
 ##########
 ## DIRS
 INCDIR = includes
-BINDIR = build
 SRCDIR = src
 OBJDIR = build
 LIBDIR = lib
 
 # TARGET
-TARGET = $(BINDIR)/drive_graal
+TARGET = $(OBJDIR)/drive_graal
 
 ## EXTENSIONS
 SRCEXT = cpp
@@ -27,27 +26,24 @@ CC = g++
 WARN = -Wall
 INCFLAG = -I $(INCDIR)
 INLFLAG = -L $(LIBDIR) -l graal
-CFLAGS = $(WARN) -std=c++11 $(INCFLAG) $(INLFLAG) -c
+CFLAGS = $(WARN) -std=c++11 $(INCFLAG) -c
+OBJFLAGS = $(INCFLAG) $(INLFLAG)
 
-#g++ -Wall -std=c++11 src/drive_graal.cpp -I includes -L lib -l graal -o build/drive_graa
-order:
-	@echo "Copiando biblioteca..."
-	@cp ../graal/build/libgraal.a lib/
-	@echo "Copiando includes..."
-	@cp ../graal/includes/graal.h includes/
-
-.PHONY: order
-
+#g++ -Wall -std=c++11 src/drive_graal.cpp -I includes -L lib -l graal -o build/drive_graa 
+#all: $(TARGET) clean
+all: $(TARGET) clean	
+#g++ -Wall -I includes -std=c++11 -c -o 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@echo "Gerando código objeto..."
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(TARGET): $(OBJS)
 	@echo "Compilando..."
-	$(CC) -o $@ $^
+	$(CC) $^ $(INLFLAG) -o $@  
 
+.PHONY: clean
 clean:
 	@echo "Limpando..."
 	@rm -rf $(OBJDIR)/*.o
 	
-.PHONY: clean

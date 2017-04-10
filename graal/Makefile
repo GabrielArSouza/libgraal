@@ -8,7 +8,7 @@ SRCDIR = src
 OBJDIR = build
 
 # TARGET #
-TARGET = $(BINDIR)/libgraal.a
+TARGET = $(OBJDIR)/libgraal.a
 
 ## EXTENSIONS 
 SRCEXT = cpp
