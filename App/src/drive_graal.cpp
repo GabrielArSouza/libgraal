@@ -46,7 +46,7 @@ int compare ( const void * a, const void * b )
 int main ()
 {
 
-	int A[] = { 1, 3, 5, -9, 0, -4, -3, 2, 2, 4};
+	int A[] = { 1, 3, 5, -9, 0, -4, -3, 2, 2, -4};
 
 	std::cout << ">>> Array A [ ";
 	graal::transform( std::begin(A), std::end(A), sizeof(int), print_int );
@@ -83,7 +83,7 @@ int main ()
 
     //testando Remove_If
     {
-    	std::cout << ">>> Removendo números positivos de A...\n";
+    	std::cout << ">>> Removendo números negativos de A...\n";
     	auto lim = (int *) graal::Remove_IF(std::begin(A), std::end(A), sizeof(int), is_positive);
     	std::cout << ">>> Array A [ ";
 		graal::transform( std::begin(A), lim, sizeof(int), print_int );
@@ -114,6 +114,32 @@ int main ()
     	auto p = ( int *) graal::BSearch( std::begin(T), std::end(T), sizeof(int), compare, &target);
     	if ( p == std::end(T) ) std::cout << " Não Achei :( \n";
     	else std::cout << ">>> Você procurou o número " << *p << std::endl;
+    }
+
+    //testando QSort
+    {
+    	int VA[] = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+    	std::cout << ">>>Array VA [ ";
+    	graal::transform( std::begin(VA), std::end(VA), sizeof(int), print_int);
+    	std::cout << " ]\n";
+    	std::cout << "Ordenando...\n";
+    	graal::QSort(std::begin(VA), std::end(VA), sizeof(int), compare);
+    	std::cout << ">>>Array VA Ordenado por Quick Sort [ ";
+    	graal::transform( std::begin(VA), std::end(VA), sizeof(int), print_int);
+    	std::cout << " ]\n";
+    }
+
+    //testando BSort
+    {
+    	int VB[] = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+    	std::cout << ">>>Array VB [ ";
+    	graal::transform( std::begin(VB), std::end(VB), sizeof(int), print_int);
+    	std::cout << " ]\n";
+    	std::cout << "Ordenando...\n";
+    	graal::BSort(std::begin(VB), std::end(VB), sizeof(int), compare);
+    	std::cout << ">>>Array VB Ordenado por Booble Sort [ ";
+    	graal::transform( std::begin(VB), std::end(VB), sizeof(int), print_int);
+    	std::cout << " ]\n";
     }
 
 

@@ -16,9 +16,11 @@ namespace graal {
 	void * Find_If ( const void *first, const void *last, std::size_t size, UnaryPredicate p );
 	void * Min ( const void *first, const void *last, std::size_t size, Compare cmp);
 	void * Copy ( const void *first, const void *last, std::size_t size, void *d_first );
-	void * Remove_IF ( const void *first, const void * last, std::size_t size, UnaryPredicate p );
-	void * Unique ( const void *first, const void * last, std::size_t size, Compare cmp );
-	void * BSearch ( const void *left, const void * right, std::size_t size, CompareTotal cmp, const void * target);
+	void * Remove_IF ( const void *first, const void *last, std::size_t size, UnaryPredicate p );
+	void * Unique ( const void *first, const void *last, std::size_t size, Compare cmp );
+	void * BSearch ( const void *left, const void *right, std::size_t size, CompareTotal cmp, const void * target);
+	void * QSort ( const void *first, const void *last, std::size_t size, CompareTotal cmp);
+	void * BSort ( const void *first, const void *last, std::size_t size, CompareTotal cmp);
 }
 
 
