@@ -219,7 +219,7 @@ namespace graal {
 			
 				auto prox = i + size;
 				auto v = cmp( i, prox );
-				
+
 				if ( v == 1)
 				{
 					memcpy ( aux, i, size );
@@ -234,5 +234,34 @@ namespace graal {
 		return ( void * ) 0;
 	}
 
+	void
+	* SSort ( const void *first, const void *last,
+			  std::size_t size, CompareTotal cmp)
+	{
 
+		auto f = ( byte * ) first;
+		auto l = ( byte * ) last;
+
+		byte aux[size];
+
+		for ( auto i(f); i < l-size; i += size )
+		{
+			auto min = i;
+			for ( auto j(i+size); j < l; j += size)
+			{
+
+				if ( cmp( j, min ) == -1 )
+				{
+					min = j;
+				}
+
+			}
+
+			memcpy ( aux, i, size );
+			memcpy ( i, min, size );
+			memcpy ( min, aux, size );
+		}
+
+		return ( void * ) 0;
+	}
 }

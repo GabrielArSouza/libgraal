@@ -142,6 +142,19 @@ int main ()
     	std::cout << " ]\n";
     }
 
+    //testando SSort
+    {
+    	int VC[] = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+    	std::cout << ">>>Array VC [ ";
+    	graal::transform( std::begin(VC), std::end(VC), sizeof(int), print_int);
+    	std::cout << " ]\n";
+    	std::cout << "Ordenando...\n";
+    	graal::SSort(std::begin(VC), std::end(VC), sizeof(int), compare);
+    	std::cout << ">>>Array VC Ordenado por Selection Sort [ ";
+    	graal::transform( std::begin(VC), std::end(VC), sizeof(int), print_int);
+    	std::cout << " ]\n";
+    }
+
 
 	return 0;
 }
