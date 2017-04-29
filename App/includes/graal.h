@@ -26,7 +26,7 @@ namespace graal {
 	//<! Templates
 	template <typename T>
 	bool binary_search( T * first, T * last, T target);
-	#include "../src/graal.cpp";
+	#include "../lib/libgraal.a"
 }
 
 
