@@ -155,19 +155,5 @@ int main ()
     	std::cout << " ]\n";
     }
 
-    //testando busca binária com templates
-    {
-        int A[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        std::cout << ">>>Array A [ ";
-        graal::transform( std::begin(A), std::end(A), sizeof(int), print_int);
-        std::cout << " ]\n";
-        std::cout << "Estou procurando o elemento: " << A[0] << std::endl;
-        bool res = graal::binary_search( std::begin(A), std::end(A), A[0] );
-        if ( res ) std::cout << "Elemento encontrado! :)\n";
-        else std::cout << "Elemento NÃO encontrado! :(\n";
-
-    }
-
-
 	return 0;
 }

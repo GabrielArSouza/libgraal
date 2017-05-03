@@ -265,26 +265,4 @@ namespace graal {
 		return ( void * ) 0;
 	}
 
-	//<! Busca binária com templates
-	template <typename T>
-	bool binary_search( T * first, T * last, T target)
-	{
-		auto f = first;
-		auto l = last;
-
-		T * m;
-
-		while ( f < l )
-		{
-			auto d = std::distance(f, l);
-			auto t = d/sizeof(T);
-			m = f + t/2;
-
-			if ( *m == target ) return true;
-			else if ( *m > target ) l = m - 1;
-			else f = m + 1;
-
-		}
-
-	}
 }
